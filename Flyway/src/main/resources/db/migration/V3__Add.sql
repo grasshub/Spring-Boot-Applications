@@ -1,0 +1,1 @@
+insert into person (first_name, last_name, address) values ('Eric', 'Smith', '4 Bridle Path');

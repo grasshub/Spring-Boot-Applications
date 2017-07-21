@@ -1,0 +1,18 @@
+package com.greenfield.springbootmvc;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = SpringBootMvcApplication.class)
+@WebAppConfiguration
+public class SpringBootMvcApplicationTests {
+
+	@Test
+	public void contextLoads() {
+	}
+
+}

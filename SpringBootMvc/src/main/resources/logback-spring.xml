@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Spring boot expects logback-spring.xml to be on classpath. However, you can store it in different location and point to 
+it using logging.config property in application.properties file. -->
+<configuration scan="auto" scanPeriod="10 seconds">
+	<!-- Include the default spring boot logback configuration file. -->
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    
+    <!-- Customize the logging level configuration based on the profile passed in as -Dspring.profiles.active JVM arguments. -->
+    <springProfile name="dev, staging">
+	    <logger name="com.greenfield.springbootmvc.controllers" level="DEBUG" additivity="false">
+	        <appender-ref ref="CONSOLE"/>
+	        <appender-ref ref="FILE"/>
+	    </logger>
+    </springProfile>
+    
+    <springProfile name="production">
+	    <logger name="com.greenfield.springbootmvc.controllers" level="WARN" additivity="false">
+	        <!-- appender-ref ref="CONSOLE"/-->
+	        <appender-ref ref="FILE"/>
+	    </logger>
+    </springProfile>
+    
+    <!-- Use conditional processing of configuration with the help of Janino library from org.codehaus.janino groupId. Add it as Maven dependencies. -->
+    <if condition='property("spring.profiles.active").contains("dev")'>
+        <then>
+            <logger name="com.greenfield.springbootmvc.helper" level="DEBUG" additivity="false">
+                <appender-ref ref="CONSOLE" />
+            </logger>
+        </then>
+        <else>
+            <logger name="com.greenfield.springbootmvc.helper" level="WARN" additivity="false">
+                <appender-ref ref="FILE" />
+            </logger>
+        </else>
+    </if>
+    
+</configuration>
